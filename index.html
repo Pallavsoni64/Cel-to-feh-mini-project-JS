@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            
+            font-family: 'BIZ UDPGothic', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-weight: 300;
+        }
+
+        .main-div {
+            border: 2px solid black;
+            width: 100vw;
+            /* height: 100vh; */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: hsl(206, 71%, 15%);
+
+        }
+
+        .inner-div {
+            text-align: center;
+            color: aliceblue;
+            width: 40vw;
+            background-color: rgb(107, 151, 175);
+            padding: 3rem 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 1rem 1rem -0.7rem rgba(0, 0, 0, 0.4);
+        }
+        form{
+            font-size: 20px;
+    margin-left: 45px;
+        }
+        form input{
+            font-weight: 800;
+            text-align: center;
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 15px;
+            font-size: 15px;
+            height: 30px;
+            background-color: azure;
+
+
+        }
+        form select {
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 15px;
+             font-size: 15px;
+            height: 30px;
+            width: 80px;
+            background-color: azure;
+        }
+        #submit{
+            width: 70px;
+            color: white;
+            background-color: rgb(79, 28, 28);
+        }
+        span{
+            font-weight: bold;
+            color: black;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="main-div">
+        <div class="inner-div">
+            <form id="tempCalc" onsubmit="calculateTemp(); return false">
+                <label for="temp">Please enter the temperature you'd like to convert </label>
+                <hr>
+                <input type="number" name="temp" id="temp">
+                <select name="temp_dff" id="temp_diff">
+
+                    <option value="cel">Celcius</option>
+                    <option value="feh">fehrneit</option>
+                </select>
+                <br>
+                <input id="submit" type="submit" name="temp">
+                <br><br>
+                <span id="resultContainer"></span>
+            </form>
+        </div>
+    </div>
+    <script>
+        const calculateTemp = () => {
+            const temp = document.getElementById('temp').value;
+            const tempUnit = document.getElementById('temp_diff');
+            const valueTemp = tempUnit.options[tempUnit.selectedIndex].value;
+
+            const celToFeh = (cel) => {
+               let fehrneit = Math.round((cel*9/5) + 32);
+               return fehrneit;
+            }
+            const fehToCel = (temp) =>{
+                let celcius = Math.round((temp -32) * 5/9)
+                return celcius;
+            }
+
+            let result;
+           if(valueTemp == 'cel'){
+               result = celToFeh(temp);
+               document.getElementById('resultContainer').innerHTML= `= ${result}&#176 fehrneit`
+           }else{
+            result = fehToCel(temp);
+               document.getElementById('resultContainer').innerHTML= `= ${result}&#176 celcius `
+           }
+
+        }
+
+    </script>
+</body>
+
+</html>
